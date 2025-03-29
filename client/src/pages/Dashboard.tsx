@@ -31,7 +31,8 @@ export default function Dashboard() {
           <DataSourcesSection dataSources={dataSources} />
           
           <div>
-            <div className="flex justify-end items-center mb-4">
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-xl font-semibold text-gray-900">AI Data Agents</h2>
               <div className="relative w-64">
                 <div className="flex items-center border border-gray-300 rounded-md p-2">
                   <svg className="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
