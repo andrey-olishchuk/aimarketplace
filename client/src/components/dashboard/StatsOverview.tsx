@@ -7,7 +7,6 @@ interface StatsOverviewProps {
 export default function StatsOverview({ stats }: StatsOverviewProps) {
   return (
     <div className="mb-8">
-      <h1 className="text-2xl font-semibold text-gray-900 mb-6">Dashboard</h1>
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {stats.map((stat, index) => (
           <div key={index} className="bg-white overflow-hidden shadow rounded-lg">
