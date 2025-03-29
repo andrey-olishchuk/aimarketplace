@@ -48,7 +48,7 @@ export default function HiredAgentsSection({ agents }: HiredAgentsSectionProps) 
                   
                   <div className="p-5">
                     <div className="flex">
-                      {/* Avatar with active status indicator */}
+                      {/* Agent avatar */}
                       <div className="relative">
                         <Avatar className="h-16 w-16 rounded-full mr-4 flex-shrink-0 border-2 border-white shadow-md">
                           <AvatarImage src={agent.avatarUrl} alt={agent.name} />
@@ -56,17 +56,14 @@ export default function HiredAgentsSection({ agents }: HiredAgentsSectionProps) 
                             {agent.name.split(' ').map(word => word[0]).join('').toUpperCase()}
                           </AvatarFallback>
                         </Avatar>
-                        <span className="absolute bottom-0 right-4 block h-3.5 w-3.5 rounded-full bg-green-400 border-2 border-white" />
                       </div>
                       
                       <div className="flex-1">
                         <h4 className="text-lg font-semibold text-gray-900">{agent.name}</h4>
                         <div className="flex items-center mt-1">
-                          <span className="h-2 w-2 rounded-full bg-green-400 mr-1.5"></span>
-                          <span className="text-sm text-green-600 font-medium">Active</span>
                           <Badge 
                             variant="outline" 
-                            className={`ml-3 ${agent.type === 'premium' 
+                            className={`${agent.type === 'premium' 
                               ? 'bg-amber-100 text-amber-800 border-amber-200' 
                               : 'bg-blue-100 text-blue-800 border-blue-200'}`}
                           >
