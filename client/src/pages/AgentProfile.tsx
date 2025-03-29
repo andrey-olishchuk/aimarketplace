@@ -84,17 +84,27 @@ export default function AgentProfile() {
                   </div>
                 </div>
               </div>
-              <button 
-                type="button" 
-                className={`inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white ${
-                  agent.type === 'free' 
-                    ? 'bg-primary hover:bg-blue-700 focus:ring-primary' 
-                    : 'bg-secondary hover:bg-purple-700 focus:ring-secondary'
-                } focus:outline-none focus:ring-2 focus:ring-offset-2`}
-                onClick={() => setShowChat(true)}
-              >
-                {isHired ? 'Ask' : 'Chat with Agent'}
-              </button>
+              {isHired ? (
+                <button 
+                  type="button" 
+                  className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-primary hover:bg-blue-700 focus:ring-primary focus:outline-none focus:ring-2 focus:ring-offset-2"
+                  onClick={() => setShowChat(true)}
+                >
+                  Chat with Agent
+                </button>
+              ) : (
+                <button 
+                  type="button" 
+                  className={`inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white ${
+                    agent.type === 'free' 
+                      ? 'bg-primary hover:bg-blue-700 focus:ring-primary' 
+                      : 'bg-amber-600 hover:bg-amber-700 focus:ring-amber-600'
+                  } focus:outline-none focus:ring-2 focus:ring-offset-2`}
+                  onClick={() => setShowChat(true)}
+                >
+                  {agent.type === 'free' ? 'Hire for free' : 'Hire Premium'}
+                </button>
+              )}
             </div>
             
             <div className="border-t border-gray-200 px-4 py-5 sm:px-6">
