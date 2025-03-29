@@ -57,7 +57,7 @@ export const stats: StatCard[] = [
     iconColor: "text-white"
   },
   {
-    title: "Active Agents",
+    title: "Free Agents",
     value: "2",
     iconPath: "M13 7h8m0 0v8m0-8l-8 8-4-4-6 6",
     iconBg: "bg-green-500",
@@ -71,8 +71,8 @@ export const stats: StatCard[] = [
     iconColor: "text-white"
   },
   {
-    title: "Processing Time",
-    value: "320 hrs",
+    title: "Premium Agents",
+    value: "3",
     iconPath: "M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z",
     iconBg: "bg-secondary",
     iconColor: "text-white"
@@ -107,61 +107,30 @@ export const dataSources: DataSource[] = [
 export const freeAgents: Agent[] = [
   {
     id: 1,
-    name: "Data Explorer",
-    description: "Quickly explore and understand your data with automated analysis and visualizations. Best for getting started with data exploration.",
-    fullDescription: "Quickly explore and understand your data with automated analysis and visualizations. The Data Explorer agent helps you discover patterns, identify outliers, and understand distributions in your data without complex coding or query writing. It's designed for data analysts, business users, and anyone who needs to quickly make sense of their data.",
+    name: "Device Reporter",
+    description: "Creates comprehensive reports about device state, anomalies, and predictions based on sensor data for proactive maintenance.",
+    fullDescription: "Creates comprehensive reports about device state, anomalies, and predictions based on sensor data. The Device Reporter agent automatically monitors connected devices, analyzes performance patterns, and generates detailed reports highlighting potential issues and maintenance recommendations. It's perfect for operations teams, maintenance staff, and IoT device managers who need to stay ahead of equipment failures.",
     type: "free",
     tags: [
-      { name: "Data Analysis", bgColor: "bg-blue-100", textColor: "text-blue-800" },
-      { name: "Visualization", bgColor: "bg-green-100", textColor: "text-green-800" }
+      { name: "Device Monitoring", bgColor: "bg-blue-100", textColor: "text-blue-800" },
+      { name: "Predictive Maintenance", bgColor: "bg-green-100", textColor: "text-green-800" }
     ],
-    iconPath: "M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z",
+    iconPath: "M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z",
     iconBg: "bg-blue-100",
     iconColor: "text-blue-600",
     compatibleWith: "all sources",
     capabilities: [
-      "Automatic data profiling and distribution analysis",
-      "Interactive exploratory data visualizations",
-      "Correlation analysis between variables",
-      "Summary statistics and insights",
-      "Natural language explanations of findings",
-      "Export and sharing of results"
+      "Automatic sensor data monitoring and analysis",
+      "Anomaly detection for device operations",
+      "Performance trend reporting",
+      "Predictive maintenance recommendations",
+      "Device health scoring and status summaries",
+      "Comparative analysis across device fleets",
+      "Scheduled reporting with customizable frequency"
     ],
     sampleOutputDescriptions: [
-      "Distribution analysis showing outliers in sensor data",
-      "Correlation matrix identifying relationships between metrics"
-    ],
-    compatibilitySources: [
-      { name: "InfluxDB Cloud", bgColor: "bg-blue-100", textColor: "text-blue-800" },
-      { name: "PostgreSQL", bgColor: "bg-indigo-100", textColor: "text-indigo-800" },
-      { name: "Redis Cloud", bgColor: "bg-red-100", textColor: "text-red-800" }
-    ]
-  },
-  {
-    id: 2,
-    name: "Trend Spotter",
-    description: "Automatically detect trends, patterns, and anomalies in your time-series data. Great for monitoring and quick insights.",
-    fullDescription: "Automatically detect trends, patterns, and anomalies in your time-series data. The Trend Spotter agent uses advanced statistical methods to identify significant changes in your data over time, helping you stay ahead of potential issues or opportunities. Perfect for operations teams, data analysts, and business intelligence professionals.",
-    type: "free",
-    tags: [
-      { name: "Trend Analysis", bgColor: "bg-green-100", textColor: "text-green-800" },
-      { name: "Forecasting", bgColor: "bg-yellow-100", textColor: "text-yellow-800" }
-    ],
-    iconPath: "M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z",
-    iconBg: "bg-green-100",
-    iconColor: "text-green-600",
-    compatibleWith: "InfluxDB, PostgreSQL",
-    capabilities: [
-      "Automated trend detection in time-series data",
-      "Seasonal pattern identification",
-      "Anomaly detection with confidence levels",
-      "Short-term forecasting with confidence intervals",
-      "Alert recommendations for unusual patterns",
-      "Comparative analysis across different time periods"
-    ],
-    sampleOutputDescriptions: [
-      "Time-series visualization highlighting detected trends",
-      "Forecasting model with confidence intervals for the next 7 days"
+      "Device health report with highlighted maintenance needs",
+      "Anomaly detection showing potential device failures"
     ],
     compatibilitySources: [
       { name: "InfluxDB Cloud", bgColor: "bg-blue-100", textColor: "text-blue-800" },
@@ -169,7 +138,7 @@ export const freeAgents: Agent[] = [
     ]
   },
   {
-    id: 3,
+    id: 2,
     name: "Data Q&A",
     description: "Ask questions about your data in plain English and get instant answers. Perfect for non-technical team members.",
     fullDescription: "Ask questions about your data in plain English and get instant answers. The Data Q&A agent translates your natural language questions into the appropriate queries, retrieves the relevant data, and presents the answers in an easy-to-understand format. This agent bridges the gap between your data and team members who may not have technical expertise.",
