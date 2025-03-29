@@ -6,11 +6,22 @@ import DeviceReport from "@/components/reports/DeviceReport";
 import { freeAgents, premiumAgents, hiredAgents } from "@/data/mockData";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { 
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle
+} from "@/components/ui/alert-dialog";
 
 export default function AgentProfile() {
   const [, setLocation] = useLocation();
   const [match, params] = useRoute("/agent/:id");
   const [showChatView, setShowChatView] = useState(false);
+  const [showBillingConfirmation, setShowBillingConfirmation] = useState(false);
   
   // Parse query parameters to check if we should show chat
   useEffect(() => {
@@ -33,10 +44,41 @@ export default function AgentProfile() {
     return null;
   }
 
+  const handleHireClick = () => {
+    if (agent.type === 'premium') {
+      setShowBillingConfirmation(true);
+    } else {
+      setShowChatView(true);
+    }
+  };
+
+  const confirmBilling = () => {
+    setShowBillingConfirmation(false);
+    setShowChatView(true);
+  };
+
   const isDeviceReporter = agent.name === "Device Reporter";
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
+      {/* Billing confirmation dialog */}
+      <AlertDialog open={showBillingConfirmation} onOpenChange={setShowBillingConfirmation}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Premium Agent Subscription</AlertDialogTitle>
+            <AlertDialogDescription>
+              Your account will be billed monthly for this agent. You can unsubscribe any time.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction onClick={confirmBilling} className="bg-amber-600 hover:bg-amber-700">
+              Confirm Subscription
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+      
       <Navbar />
       
       <main className="flex-grow">
@@ -146,7 +188,7 @@ export default function AgentProfile() {
                       ? 'bg-primary hover:bg-blue-700 focus:ring-primary' 
                       : 'bg-amber-600 hover:bg-amber-700 focus:ring-amber-600'
                   }`}
-                  onClick={() => setShowChatView(!showChatView)}
+                  onClick={handleHireClick}
                 >
                   {agent.type === 'free' ? 'Hire for free' : 'Hire Premium'}
                 </Button>
