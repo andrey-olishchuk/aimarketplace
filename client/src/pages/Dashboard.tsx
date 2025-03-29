@@ -1,25 +1,13 @@
 import Navbar from "@/components/layout/Navbar";
 import StatsOverview from "@/components/dashboard/StatsOverview";
 import DataSourcesSection from "@/components/dashboard/DataSourcesSection";
-import FreeAgentsSection from "@/components/agents/FreeAgentsSection";
-import PremiumAgentsSection from "@/components/agents/PremiumAgentsSection";
-import { stats, dataSources, freeAgents, premiumAgents } from "@/data/mockData";
+import HiredAgentsSection from "@/components/agents/HiredAgentsSection";
+import AgentsCatalogue from "@/components/agents/AgentsCatalogue";
+import { stats, dataSources, freeAgents, premiumAgents, hiredAgents } from "@/data/mockData";
 import { useState } from "react";
 
 export default function Dashboard() {
   const [searchQuery, setSearchQuery] = useState("");
-  
-  const filteredFreeAgents = freeAgents.filter(agent => 
-    agent.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    agent.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    agent.tags.some(tag => tag.name.toLowerCase().includes(searchQuery.toLowerCase()))
-  );
-  
-  const filteredPremiumAgents = premiumAgents.filter(agent => 
-    agent.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    agent.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    agent.tags.some(tag => tag.name.toLowerCase().includes(searchQuery.toLowerCase()))
-  );
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
@@ -49,8 +37,12 @@ export default function Dashboard() {
               </div>
             </div>
             
-            <FreeAgentsSection agents={filteredFreeAgents} />
-            <PremiumAgentsSection agents={filteredPremiumAgents} />
+            <HiredAgentsSection agents={hiredAgents} />
+            <AgentsCatalogue 
+              freeAgents={freeAgents} 
+              premiumAgents={premiumAgents} 
+              searchQuery={searchQuery} 
+            />
           </div>
         </div>
       </main>

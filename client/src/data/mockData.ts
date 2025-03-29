@@ -48,6 +48,75 @@ export interface Agent {
   compatibilitySources: CompatibilitySource[];
 }
 
+// Mock data for hired agents 
+export const hiredAgents: Agent[] = [
+  {
+    id: 1,
+    name: "Device Reporter",
+    description: "Creates comprehensive reports about device state, anomalies, and predictions based on sensor data for proactive maintenance.",
+    fullDescription: "Creates comprehensive reports about device state, anomalies, and predictions based on sensor data. The Device Reporter agent automatically monitors connected devices, analyzes performance patterns, and generates detailed reports highlighting potential issues and maintenance recommendations. It's perfect for operations teams, maintenance staff, and IoT device managers who need to stay ahead of equipment failures.",
+    type: "free",
+    tags: [
+      { name: "Device Monitoring", bgColor: "bg-blue-100", textColor: "text-blue-800" },
+      { name: "Predictive Maintenance", bgColor: "bg-green-100", textColor: "text-green-800" }
+    ],
+    iconPath: "M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z",
+    iconBg: "bg-blue-100",
+    iconColor: "text-blue-600",
+    compatibleWith: "all sources",
+    capabilities: [
+      "Automatic sensor data monitoring and analysis",
+      "Anomaly detection for device operations",
+      "Performance trend reporting",
+      "Predictive maintenance recommendations",
+      "Device health scoring and status summaries",
+      "Comparative analysis across device fleets",
+      "Scheduled reporting with customizable frequency"
+    ],
+    sampleOutputDescriptions: [
+      "Device health report with highlighted maintenance needs",
+      "Anomaly detection showing potential device failures"
+    ],
+    compatibilitySources: [
+      { name: "InfluxDB Cloud", bgColor: "bg-blue-100", textColor: "text-blue-800" },
+      { name: "PostgreSQL", bgColor: "bg-indigo-100", textColor: "text-indigo-800" }
+    ]
+  },
+  {
+    id: 4,
+    name: "AI Model Trainer",
+    description: "Automatically trains, evaluates, and deploys machine learning models based on your data. Handles feature engineering and hyperparameter tuning.",
+    fullDescription: "Automatically trains, evaluates, and deploys machine learning models based on your data. The AI Model Trainer agent intelligently selects appropriate algorithms, performs feature engineering, and optimizes hyperparameters to create high-performing predictive models. It also provides detailed model explanations and deployment options to integrate predictions into your workflows.",
+    type: "premium",
+    tags: [
+      { name: "AITraining", bgColor: "bg-secondary bg-opacity-20", textColor: "text-secondary" },
+      { name: "MLOps", bgColor: "bg-indigo-100", textColor: "text-indigo-800" }
+    ],
+    iconPath: "M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z",
+    iconBg: "bg-secondary",
+    iconColor: "text-white",
+    compatibleWith: "all sources",
+    capabilities: [
+      "Automated machine learning model training",
+      "Intelligent feature engineering and selection",
+      "Hyperparameter optimization",
+      "Model evaluation and comparison",
+      "Model explainability and transparency",
+      "Continuous model monitoring and retraining",
+      "Deployment options for real-time or batch predictions"
+    ],
+    sampleOutputDescriptions: [
+      "Feature importance visualization for predictive model",
+      "Performance metrics comparison across different algorithms"
+    ],
+    compatibilitySources: [
+      { name: "InfluxDB Cloud", bgColor: "bg-blue-100", textColor: "text-blue-800" },
+      { name: "PostgreSQL", bgColor: "bg-indigo-100", textColor: "text-indigo-800" },
+      { name: "Redis Cloud", bgColor: "bg-red-100", textColor: "text-red-800" }
+    ]
+  }
+];
+
 // Mock data for stats cards
 export const stats: StatCard[] = [
   {

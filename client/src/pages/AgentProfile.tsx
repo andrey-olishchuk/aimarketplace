@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useRoute, useLocation } from "wouter";
 import Navbar from "@/components/layout/Navbar";
 import ChatInterface from "@/components/chat/ChatInterface";
-import { freeAgents, premiumAgents } from "@/data/mockData";
+import { freeAgents, premiumAgents, hiredAgents } from "@/data/mockData";
 
 export default function AgentProfile() {
   const [, setLocation] = useLocation();
@@ -20,7 +20,10 @@ export default function AgentProfile() {
   if (!match) return null;
 
   const id = parseInt(params.id);
-  const agent = [...freeAgents, ...premiumAgents].find(a => a.id === id);
+  // Check if this is a hired agent
+  const isHired = hiredAgents.some(a => a.id === id);
+  // Get agent from all possible sources
+  const agent = [...freeAgents, ...premiumAgents, ...hiredAgents].find(a => a.id === id);
 
   if (!agent) {
     setLocation("/not-found");
@@ -88,7 +91,7 @@ export default function AgentProfile() {
                 } focus:outline-none focus:ring-2 focus:ring-offset-2`}
                 onClick={() => setShowChat(true)}
               >
-                {agent.type === 'free' ? 'Hire for free' : 'Hire Premium'}
+                {isHired ? 'Ask' : (agent.type === 'free' ? 'Hire for free' : 'Hire Premium')}
               </button>
             </div>
             
