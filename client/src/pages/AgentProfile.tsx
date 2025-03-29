@@ -2,8 +2,10 @@ import { useState, useEffect } from "react";
 import { useRoute, useLocation } from "wouter";
 import Navbar from "@/components/layout/Navbar";
 import ChatInterface from "@/components/chat/ChatInterface";
+import DeviceReport from "@/components/reports/DeviceReport";
 import { freeAgents, premiumAgents, hiredAgents } from "@/data/mockData";
 import { Button } from "@/components/ui/button";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export default function AgentProfile() {
   const [, setLocation] = useLocation();
@@ -31,6 +33,8 @@ export default function AgentProfile() {
     return null;
   }
 
+  const isDeviceReporter = agent.name === "Device Reporter";
+
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
       <Navbar />
@@ -51,7 +55,7 @@ export default function AgentProfile() {
 
           {isHired ? (
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {/* Chat interface - Main content for hired agents */}
+              {/* Main content for hired agents */}
               <div className="md:col-span-2">
                 <div className="bg-white shadow overflow-hidden sm:rounded-lg h-full">
                   <div className="px-4 py-3 sm:px-6 border-b border-gray-200">
@@ -62,12 +66,31 @@ export default function AgentProfile() {
                         </svg>
                       </div>
                       <div className="ml-3">
-                        <h3 className="text-lg font-medium text-gray-900">Chat with {agent.name}</h3>
+                        <h3 className="text-lg font-medium text-gray-900">
+                          {isDeviceReporter ? "Device Report" : `Chat with ${agent.name}`}
+                        </h3>
                       </div>
                     </div>
                   </div>
                   <div className="p-4" style={{ minHeight: "500px" }}>
-                    <ChatInterface agent={agent} onBack={() => {}} inline={true} />
+                    {isDeviceReporter ? (
+                      // Device Reporter shows a report with tabs including a chat option
+                      <Tabs defaultValue="report" className="w-full">
+                        <TabsList className="mb-4">
+                          <TabsTrigger value="report">Daily Report</TabsTrigger>
+                          <TabsTrigger value="chat">Ask Questions</TabsTrigger>
+                        </TabsList>
+                        <TabsContent value="report">
+                          <DeviceReport agent={agent} />
+                        </TabsContent>
+                        <TabsContent value="chat">
+                          <ChatInterface agent={agent} onBack={() => {}} inline={true} />
+                        </TabsContent>
+                      </Tabs>
+                    ) : (
+                      // Other agents just show the chat interface
+                      <ChatInterface agent={agent} onBack={() => {}} inline={true} />
+                    )}
                   </div>
                 </div>
               </div>
