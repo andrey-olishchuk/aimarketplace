@@ -74,19 +74,8 @@ export default function AgentProfile() {
                   </div>
                   <div className="p-4" style={{ minHeight: "500px" }}>
                     {isDeviceReporter ? (
-                      // Device Reporter shows a report with tabs including a chat option
-                      <Tabs defaultValue="report" className="w-full">
-                        <TabsList className="mb-4">
-                          <TabsTrigger value="report">Daily Report</TabsTrigger>
-                          <TabsTrigger value="chat">Ask Questions</TabsTrigger>
-                        </TabsList>
-                        <TabsContent value="report">
-                          <DeviceReport agent={agent} />
-                        </TabsContent>
-                        <TabsContent value="chat">
-                          <ChatInterface agent={agent} onBack={() => {}} inline={true} />
-                        </TabsContent>
-                      </Tabs>
+                      // Device Reporter only shows the report
+                      <DeviceReport agent={agent} />
                     ) : (
                       // Other agents just show the chat interface
                       <ChatInterface agent={agent} onBack={() => {}} inline={true} />

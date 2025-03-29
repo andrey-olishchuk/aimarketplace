@@ -1,55 +1,77 @@
+import { useState, useEffect } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Agent } from "../../data/mockData";
-import { ChevronDown, ChevronUp, AlertTriangle, Check, TrendingUp, TrendingDown, BarChart, HelpCircle } from "lucide-react";
+import { ChevronDown, ChevronUp, AlertTriangle, Check, TrendingUp, TrendingDown, BarChart, HelpCircle, Loader2 } from "lucide-react";
 
 interface DeviceReportProps {
   agent: Agent;
 }
 
 export default function DeviceReport({ agent }: DeviceReportProps) {
-  // Mock data for the device report
+  const [isLoading, setIsLoading] = useState(true);
+  
+  // Simulate loading time
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2300); // 2.3 seconds of loading time
+    
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Mock data for the device report focused on vessel motor IMU
   const reportData = {
     generatedAt: new Date().toLocaleString(),
     deviceStatus: "Healthy",
     deviceHealth: 92,
     anomaliesDetected: 2,
     predictions: [
-      { metric: "CPU Temperature", trend: "stable", prediction: "No issues expected for the next 30 days" },
-      { metric: "Memory Usage", trend: "increasing", prediction: "May reach 85% in 14 days, consider optimization" },
+      { metric: "Gyroscope Stability", trend: "stable", prediction: "No issues expected for the next 30 days" },
+      { metric: "Motor Vibration", trend: "increasing", prediction: "May reach threshold in 14 days, consider maintenance inspection" },
     ],
     anomalies: [
       { 
         id: 1, 
-        metric: "Disk I/O", 
+        metric: "Acceleration Yaw", 
         severity: "low", 
         timestamp: "2025-03-28 14:23:47", 
-        description: "Unusual spike in disk write operations (234 MB/s vs avg 42 MB/s)",
-        recommendation: "Monitor for recurrence, no immediate action needed"
+        description: "Unusual pattern in yaw axis acceleration (0.42g vs avg 0.25g)",
+        recommendation: "Monitor for recurrence during next operational cycle"
       },
       { 
         id: 2, 
-        metric: "Network", 
+        metric: "Motor Resonance", 
         severity: "medium", 
         timestamp: "2025-03-28 18:11:05", 
-        description: "Sustained high outbound traffic (98% capacity for 45 minutes)",
-        recommendation: "Investigate possible data exfiltration or backup processes"
+        description: "Vibration frequency 58.3Hz detected consistently for 45 minutes at full throttle",
+        recommendation: "Schedule preventative maintenance to inspect motor bearings"
       }
     ],
     performanceMetrics: [
-      { name: "CPU", current: 42, change: -3, status: "normal" },
-      { name: "Memory", current: 67, change: +12, status: "normal" },
-      { name: "Disk", current: 78, change: +5, status: "normal" },
-      { name: "Network", current: 54, change: +27, status: "warning" },
+      { name: "IMU Temperature", current: 42, change: -3, status: "normal" },
+      { name: "Gyro Drift", current: 0.27, change: +0.05, status: "normal", unit: "°/h" },
+      { name: "Motor Vibration", current: 28, change: +5, status: "normal" },
+      { name: "Propeller Balance", current: 94, change: -2, status: "normal" },
     ]
   };
+
+  if (isLoading) {
+    return (
+      <div className="flex flex-col items-center justify-center space-y-4 py-12">
+        <Loader2 className="h-12 w-12 animate-spin text-primary" />
+        <p className="text-lg font-medium text-gray-700">Report creation in process...</p>
+        <Progress value={65} className="w-64 h-2" />
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <h2 className="text-2xl font-bold">Device Daily Report</h2>
+        <h2 className="text-2xl font-bold">Vessel Motor IMU Report</h2>
         <Badge variant="outline" className="text-xs">
           Generated at {reportData.generatedAt}
         </Badge>
@@ -58,7 +80,7 @@ export default function DeviceReport({ agent }: DeviceReportProps) {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <Card>
           <CardHeader className="pb-2">
-            <CardTitle className="text-lg">Device Status</CardTitle>
+            <CardTitle className="text-lg">Motor Status</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="flex items-center justify-between">
@@ -116,7 +138,7 @@ export default function DeviceReport({ agent }: DeviceReportProps) {
 
         <Card>
           <CardHeader className="pb-2">
-            <CardTitle className="text-lg">Performance Metrics</CardTitle>
+            <CardTitle className="text-lg">IMU Metrics</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-2">
@@ -129,15 +151,15 @@ export default function DeviceReport({ agent }: DeviceReportProps) {
                     <span className={`text-sm ${
                       metric.status === "normal" ? "text-green-600" : "text-yellow-600"
                     }`}>
-                      {metric.current}%
+                      {metric.current}{metric.unit ? metric.unit : '%'}
                     </span>
                     <span className={`flex items-center text-xs ${
                       metric.change > 0 ? "text-red-500" : "text-green-500"
                     }`}>
                       {metric.change > 0 ? (
-                        <><ChevronUp className="w-3 h-3" />{Math.abs(metric.change)}%</>
+                        <><ChevronUp className="w-3 h-3" />{Math.abs(metric.change)}{metric.unit ? metric.unit : '%'}</>
                       ) : (
-                        <><ChevronDown className="w-3 h-3" />{Math.abs(metric.change)}%</>
+                        <><ChevronDown className="w-3 h-3" />{Math.abs(metric.change)}{metric.unit ? metric.unit : '%'}</>
                       )}
                     </span>
                   </div>
