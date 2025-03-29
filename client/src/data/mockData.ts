@@ -81,6 +81,38 @@ export const hiredAgents: Agent[] = [
       { name: "InfluxDB Cloud", bgColor: "bg-blue-100", textColor: "text-blue-800" },
       { name: "PostgreSQL", bgColor: "bg-indigo-100", textColor: "text-indigo-800" }
     ]
+  },
+  {
+    id: 2,
+    name: "Data Q&A",
+    description: "Ask questions about your data in plain English and get instant answers. Perfect for non-technical team members.",
+    fullDescription: "Ask questions about your data in plain English and get instant answers. The Data Q&A agent translates your natural language questions into the appropriate queries, retrieves the relevant data, and presents the answers in an easy-to-understand format. This agent bridges the gap between your data and team members who may not have technical expertise.",
+    type: "free",
+    tags: [
+      { name: "Natural Language", bgColor: "bg-yellow-100", textColor: "text-yellow-800" },
+      { name: "Basic Insights", bgColor: "bg-blue-100", textColor: "text-blue-800" }
+    ],
+    iconPath: "M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z",
+    iconBg: "bg-yellow-100",
+    iconColor: "text-yellow-600",
+    compatibleWith: "all sources",
+    capabilities: [
+      "Natural language processing for data questions",
+      "Simple query generation for all connected data sources",
+      "Basic visualization of query results",
+      "Explanations of data findings",
+      "Question refinement suggestions",
+      "Data source recommendations for specific questions"
+    ],
+    sampleOutputDescriptions: [
+      "Response to natural language query with supporting data",
+      "Simple visualization of query results with explanation"
+    ],
+    compatibilitySources: [
+      { name: "InfluxDB Cloud", bgColor: "bg-blue-100", textColor: "text-blue-800" },
+      { name: "PostgreSQL", bgColor: "bg-indigo-100", textColor: "text-indigo-800" },
+      { name: "Redis Cloud", bgColor: "bg-red-100", textColor: "text-red-800" }
+    ]
   }
 ];
 
@@ -95,8 +127,8 @@ export const stats: StatCard[] = [
   },
   {
     title: "Hired Agents",
-    value: "1",
-    description: "1 Free · 0 Premium",
+    value: "2",
+    description: "2 Free · 0 Premium",
     iconPath: "M13 7h8m0 0v8m0-8l-8 8-4-4-6 6",
     iconBg: "bg-green-500",
     iconColor: "text-white"
@@ -229,6 +261,40 @@ export const premiumAgents: Agent[] = [
       { name: "InfluxDB Cloud", bgColor: "bg-blue-100", textColor: "text-blue-800" },
       { name: "PostgreSQL", bgColor: "bg-indigo-100", textColor: "text-indigo-800" },
       { name: "Redis Cloud", bgColor: "bg-red-100", textColor: "text-red-800" }
+    ]
+  },
+  {
+    id: 5,
+    name: "Anomaly Finder",
+    description: "Detects and explains unusual patterns in your data with advanced anomaly detection algorithms and root cause analysis.",
+    fullDescription: "Detects and explains unusual patterns in your data using advanced anomaly detection algorithms and provides detailed root cause analysis. The Anomaly Finder agent continuously monitors your time-series data, identifies outliers and anomalies using various machine learning techniques, and generates explanations for why these anomalies occurred. It's essential for proactive system monitoring, quality control, and performance optimization.",
+    type: "premium",
+    tags: [
+      { name: "Premium", bgColor: "bg-amber-100", textColor: "text-amber-800" },
+      { name: "FailureReasoning", bgColor: "bg-secondary bg-opacity-20", textColor: "text-secondary" },
+      { name: "Monitoring", bgColor: "bg-red-100", textColor: "text-red-800" }
+    ],
+    iconPath: "M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z",
+    iconBg: "bg-secondary",
+    iconColor: "text-white",
+    compatibleWith: "time-series sources",
+    capabilities: [
+      "Advanced anomaly detection algorithms",
+      "Real-time monitoring of data streams",
+      "Root cause analysis for detected anomalies",
+      "Correlation discovery across data sources",
+      "Automatic threshold configuration and tuning",
+      "Seasonal pattern recognition and filtering",
+      "Alert generation with severity classification",
+      "Historical anomaly comparison and trending"
+    ],
+    sampleOutputDescriptions: [
+      "Anomaly detection report with root cause explanation",
+      "Time-series visualization highlighting detected anomalies"
+    ],
+    compatibilitySources: [
+      { name: "InfluxDB Cloud", bgColor: "bg-blue-100", textColor: "text-blue-800" },
+      { name: "PostgreSQL", bgColor: "bg-indigo-100", textColor: "text-indigo-800" }
     ]
   },
   {
