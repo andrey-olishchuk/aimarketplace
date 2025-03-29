@@ -3,6 +3,7 @@ import { Agent, dataSources, DataSource } from "@/data/mockData";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 interface ChatMessage {
@@ -255,11 +256,12 @@ export default function ChatInterface({ agent, onBack, inline = false }: ChatInt
                 </svg>
               </Button>
               <div className="flex items-center">
-                <div className={`${agent.iconBg} rounded-md p-2 mr-3`}>
-                  <svg className={`h-5 w-5 ${agent.iconColor}`} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={agent.iconPath} />
-                  </svg>
-                </div>
+                <Avatar className="h-8 w-8 rounded-full mr-3 flex-shrink-0 border border-white shadow-sm">
+                  <AvatarImage src={agent.avatarUrl} alt={agent.name} />
+                  <AvatarFallback className={agent.iconBg}>
+                    {agent.name.split(' ').map(word => word[0]).join('').toUpperCase()}
+                  </AvatarFallback>
+                </Avatar>
                 <h1 className="text-lg font-semibold">{agent.name}</h1>
               </div>
             </div>
@@ -300,11 +302,12 @@ export default function ChatInterface({ agent, onBack, inline = false }: ChatInt
           {/* Welcome message */}
           {messages.length === 0 && (
             <div className="text-center py-10">
-              <div className={`${agent.iconBg} rounded-full p-3 inline-flex mx-auto mb-4`}>
-                <svg className={`h-8 w-8 ${agent.iconColor}`} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={agent.iconPath} />
-                </svg>
-              </div>
+              <Avatar className="h-16 w-16 rounded-full mx-auto mb-4 border-2 border-white shadow-md">
+                <AvatarImage src={agent.avatarUrl} alt={agent.name} />
+                <AvatarFallback className={agent.iconBg}>
+                  {agent.name.split(' ').map(word => word[0]).join('').toUpperCase()}
+                </AvatarFallback>
+              </Avatar>
               <h2 className="text-xl font-medium text-gray-900 mb-2">Welcome to {agent.name}</h2>
               <p className="text-gray-500 max-w-md mx-auto mb-6">{agent.description}</p>
               <div className="text-left bg-white rounded-lg shadow p-5 max-w-lg mx-auto">

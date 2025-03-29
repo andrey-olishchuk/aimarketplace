@@ -42,6 +42,7 @@ export interface Agent {
   iconPath: string;
   iconBg: string;
   iconColor: string;
+  avatarUrl: string;  // URL to synthetic human avatar image
   compatibleWith: string;
   capabilities: string[];
   sampleOutputDescriptions: string[];
@@ -63,6 +64,7 @@ export const hiredAgents: Agent[] = [
     iconPath: "M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z",
     iconBg: "bg-blue-100",
     iconColor: "text-blue-600",
+    avatarUrl: "https://ui-avatars.com/api/?name=Device+Reporter&background=0D8ABC&color=fff&size=256",
     compatibleWith: "all sources",
     capabilities: [
       "Automatic sensor data monitoring and analysis",
@@ -95,6 +97,7 @@ export const hiredAgents: Agent[] = [
     iconPath: "M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z",
     iconBg: "bg-yellow-100",
     iconColor: "text-yellow-600",
+    avatarUrl: "https://ui-avatars.com/api/?name=Data+Q%26A&background=EAB308&color=fff&size=256",
     compatibleWith: "all sources",
     capabilities: [
       "Natural language processing for data questions",
@@ -174,6 +177,7 @@ export const freeAgents: Agent[] = [
     iconPath: "M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z",
     iconBg: "bg-blue-100",
     iconColor: "text-blue-600",
+    avatarUrl: "https://ui-avatars.com/api/?name=Device+Reporter&background=0D8ABC&color=fff&size=256",
     compatibleWith: "all sources",
     capabilities: [
       "Automatic sensor data monitoring and analysis",
@@ -206,6 +210,7 @@ export const freeAgents: Agent[] = [
     iconPath: "M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z",
     iconBg: "bg-yellow-100",
     iconColor: "text-yellow-600",
+    avatarUrl: "https://ui-avatars.com/api/?name=Data+Q%26A&background=EAB308&color=fff&size=256",
     compatibleWith: "all sources",
     capabilities: [
       "Natural language processing for data questions",
@@ -243,6 +248,7 @@ export const premiumAgents: Agent[] = [
     iconPath: "M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z",
     iconBg: "bg-secondary",
     iconColor: "text-white",
+    avatarUrl: "https://ui-avatars.com/api/?name=AI+Model+Trainer&background=6941C6&color=fff&size=256",
     compatibleWith: "all sources",
     capabilities: [
       "Automated machine learning model training",
@@ -277,6 +283,7 @@ export const premiumAgents: Agent[] = [
     iconPath: "M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z",
     iconBg: "bg-secondary",
     iconColor: "text-white",
+    avatarUrl: "https://ui-avatars.com/api/?name=Anomaly+Finder&background=DC2626&color=fff&size=256",
     compatibleWith: "time-series sources",
     capabilities: [
       "Advanced anomaly detection algorithms",
@@ -311,6 +318,7 @@ export const premiumAgents: Agent[] = [
     iconPath: "M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z",
     iconBg: "bg-secondary",
     iconColor: "text-white",
+    avatarUrl: "https://ui-avatars.com/api/?name=Advanced+Analytics&background=1E40AF&color=fff&size=256",
     compatibleWith: "all sources",
     capabilities: [
       "Advanced statistical analysis methods",

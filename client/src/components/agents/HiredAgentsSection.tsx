@@ -1,6 +1,7 @@
 import { Agent } from "@/data/mockData";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Link } from "wouter";
 
 interface HiredAgentsSectionProps {
@@ -20,11 +21,12 @@ export default function HiredAgentsSection({ agents }: HiredAgentsSectionProps) 
           <div key={agent.id} className="bg-white overflow-hidden shadow rounded-lg">
             <div className="p-5">
               <div className="flex items-start">
-                <div className={`${agent.iconBg} rounded-md p-3 mr-4 flex-shrink-0`}>
-                  <svg className={`h-6 w-6 ${agent.iconColor}`} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={agent.iconPath} />
-                  </svg>
-                </div>
+                <Avatar className="h-12 w-12 rounded-full mr-4 flex-shrink-0 border-2 border-white shadow-sm">
+                  <AvatarImage src={agent.avatarUrl} alt={agent.name} />
+                  <AvatarFallback className={agent.iconBg}>
+                    {agent.name.split(' ').map(word => word[0]).join('').toUpperCase()}
+                  </AvatarFallback>
+                </Avatar>
                 <div>
                   <div className="flex items-center">
                     <h4 className="text-lg font-semibold text-gray-900">{agent.name}</h4>

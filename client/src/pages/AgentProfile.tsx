@@ -6,6 +6,7 @@ import DeviceReport from "@/components/reports/DeviceReport";
 import { freeAgents, premiumAgents, hiredAgents } from "@/data/mockData";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { 
   AlertDialog,
   AlertDialogAction,
@@ -102,11 +103,12 @@ export default function AgentProfile() {
                 <div className="bg-white shadow overflow-hidden sm:rounded-lg h-full">
                   <div className="px-4 py-3 sm:px-6 border-b border-gray-200">
                     <div className="flex items-center">
-                      <div className={`flex-shrink-0 h-10 w-10 ${agent.iconBg} rounded-full flex items-center justify-center`}>
-                        <svg className={`h-6 w-6 ${agent.iconColor}`} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={agent.iconPath} />
-                        </svg>
-                      </div>
+                      <Avatar className="h-10 w-10 rounded-full flex-shrink-0 border-2 border-white shadow-sm">
+                        <AvatarImage src={agent.avatarUrl} alt={agent.name} />
+                        <AvatarFallback className={agent.iconBg}>
+                          {agent.name.split(' ').map(word => word[0]).join('').toUpperCase()}
+                        </AvatarFallback>
+                      </Avatar>
                       <div className="ml-3">
                         <h3 className="text-lg font-medium text-gray-900">
                           {isDeviceReporter ? "Device Report" : `Chat with ${agent.name}`}
@@ -161,11 +163,12 @@ export default function AgentProfile() {
             <div className="bg-white shadow overflow-hidden sm:rounded-lg">
               <div className="px-4 py-5 sm:px-6 flex justify-between">
                 <div className="flex items-center">
-                  <div className={`flex-shrink-0 h-12 w-12 ${agent.iconBg} rounded-full flex items-center justify-center`}>
-                    <svg className={`h-8 w-8 ${agent.iconColor}`} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={agent.iconPath} />
-                    </svg>
-                  </div>
+                  <Avatar className="h-12 w-12 rounded-full flex-shrink-0 border-2 border-white shadow-sm">
+                    <AvatarImage src={agent.avatarUrl} alt={agent.name} />
+                    <AvatarFallback className={agent.iconBg}>
+                      {agent.name.split(' ').map(word => word[0]).join('').toUpperCase()}
+                    </AvatarFallback>
+                  </Avatar>
                   <div className="ml-4">
                     <h2 className="text-2xl font-bold text-gray-900">{agent.name}</h2>
                     <div className="flex space-x-2 mt-1">
