@@ -8,9 +8,8 @@ export default function Navbar() {
           <div className="flex">
             <div className="flex-shrink-0 flex items-center">
               <Link href="/">
-                <span className="text-xl font-semibold text-primary cursor-pointer flex flex-col items-center">
-                  <span>AI Data Agents</span>
-                  <span className="text-lg">Marketplace</span>
+                <span className="text-xl font-semibold text-primary cursor-pointer">
+                  AI Data Agents Marketplace
                 </span>
               </Link>
             </div>
