@@ -57,24 +57,10 @@ export const stats: StatCard[] = [
     iconColor: "text-white"
   },
   {
-    title: "Free Agents",
-    value: "2",
+    title: "Hired Agents",
+    value: "5",
     iconPath: "M13 7h8m0 0v8m0-8l-8 8-4-4-6 6",
     iconBg: "bg-green-500",
-    iconColor: "text-white"
-  },
-  {
-    title: "Data Available",
-    value: "770 GB",
-    iconPath: "M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z",
-    iconBg: "bg-accent",
-    iconColor: "text-white"
-  },
-  {
-    title: "Premium Agents",
-    value: "3",
-    iconPath: "M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z",
-    iconBg: "bg-secondary",
     iconColor: "text-white"
   }
 ];
