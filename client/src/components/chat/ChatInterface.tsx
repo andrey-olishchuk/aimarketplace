@@ -1,8 +1,9 @@
 import { useState, useRef, useEffect } from "react";
-import { Agent } from "@/data/mockData";
+import { Agent, dataSources, DataSource } from "@/data/mockData";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 interface ChatMessage {
   sender: "user" | "agent";
@@ -21,7 +22,10 @@ export default function ChatInterface({ agent, onBack, inline = false }: ChatInt
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
+  const [selectedDataSource, setSelectedDataSource] = useState<string>(dataSources[0]?.id.toString() || "");
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  
+  const isDataQA = agent.name === "Data Q&A";
 
   // Auto-scroll to the bottom when messages change
   useEffect(() => {
@@ -56,9 +60,13 @@ export default function ChatInterface({ agent, onBack, inline = false }: ChatInt
           timestamp: new Date(),
         };
       } else if (agent.name === "Data Q&A") {
+        // Find selected data source
+        const source = dataSources.find(ds => ds.id.toString() === selectedDataSource);
+        const sourceName = source ? source.name : "your data sources";
+        
         agentResponse = {
           sender: "agent",
-          content: "Based on your data sources, I can see that system performance has been stable over the past week with an average response time of 230ms. There were 2 brief spikes in latency on Tuesday between 2-3pm that corresponded with scheduled backup processes. Would you like more details about specific components?",
+          content: `Based on ${sourceName}, I can see that system performance has been stable over the past week with an average response time of 230ms. There were 2 brief spikes in latency on Tuesday between 2-3pm that corresponded with scheduled backup processes. Would you like more details about specific components?`,
           timestamp: new Date(),
         };
       } else if (agent.name === "AI Model Trainer") {
@@ -85,6 +93,39 @@ export default function ChatInterface({ agent, onBack, inline = false }: ChatInt
   if (inline) {
     return (
       <div className="flex flex-col">
+        {/* Data Source Selector for Data Q&A agent */}
+        {isDataQA && (
+          <div className="mb-4">
+            <div className="flex items-center mb-2">
+              <div className="w-4 h-4 bg-blue-100 rounded-full flex items-center justify-center mr-2">
+                <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+              </div>
+              <span className="text-sm font-medium text-gray-700">Select Data Source</span>
+            </div>
+            <Select 
+              value={selectedDataSource} 
+              onValueChange={setSelectedDataSource}
+            >
+              <SelectTrigger className="w-full">
+                <SelectValue placeholder="Select a data source" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectLabel>Available Data Sources</SelectLabel>
+                  {dataSources.map((source) => (
+                    <SelectItem key={source.id} value={source.id.toString()}>
+                      <div className="flex items-center">
+                        <span className={`w-2 h-2 rounded-full ${source.status === 'Active' ? 'bg-green-500' : 'bg-gray-400'} mr-2`}></span>
+                        {source.name}
+                      </div>
+                    </SelectItem>
+                  ))}
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+          </div>
+        )}
+
         {/* Chat messages */}
         <div className="flex-1 overflow-y-auto max-h-96 space-y-4">
           {/* Welcome message */}
@@ -201,31 +242,60 @@ export default function ChatInterface({ agent, onBack, inline = false }: ChatInt
     <div className="flex flex-col h-screen bg-gray-50">
       {/* Header */}
       <div className="bg-white shadow-sm z-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
-          <div className="flex items-center">
-            <Button 
-              variant="ghost" 
-              onClick={onBack} 
-              className="mr-2 p-2"
-            >
-              <svg 
-                xmlns="http://www.w3.org/2000/svg" 
-                className="h-5 w-5" 
-                fill="none" 
-                viewBox="0 0 24 24" 
-                stroke="currentColor"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-              </svg>
-            </Button>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <div className="flex items-center justify-between">
             <div className="flex items-center">
-              <div className={`${agent.iconBg} rounded-md p-2 mr-3`}>
-                <svg className={`h-5 w-5 ${agent.iconColor}`} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={agent.iconPath} />
+              <Button 
+                variant="ghost" 
+                onClick={onBack} 
+                className="mr-2 p-2"
+              >
+                <svg 
+                  xmlns="http://www.w3.org/2000/svg" 
+                  className="h-5 w-5" 
+                  fill="none" 
+                  viewBox="0 0 24 24" 
+                  stroke="currentColor"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                 </svg>
+              </Button>
+              <div className="flex items-center">
+                <div className={`${agent.iconBg} rounded-md p-2 mr-3`}>
+                  <svg className={`h-5 w-5 ${agent.iconColor}`} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={agent.iconPath} />
+                  </svg>
+                </div>
+                <h1 className="text-lg font-semibold">{agent.name}</h1>
               </div>
-              <h1 className="text-lg font-semibold">{agent.name}</h1>
             </div>
+            
+            {/* Data Source Selector for Data Q&A agent in full page mode */}
+            {isDataQA && (
+              <div className="w-64">
+                <Select 
+                  value={selectedDataSource} 
+                  onValueChange={setSelectedDataSource}
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select a data source" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectLabel>Available Data Sources</SelectLabel>
+                      {dataSources.map((source) => (
+                        <SelectItem key={source.id} value={source.id.toString()}>
+                          <div className="flex items-center">
+                            <span className={`w-2 h-2 rounded-full ${source.status === 'Active' ? 'bg-green-500' : 'bg-gray-400'} mr-2`}></span>
+                            {source.name}
+                          </div>
+                        </SelectItem>
+                      ))}
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              </div>
+            )}
           </div>
         </div>
       </div>
