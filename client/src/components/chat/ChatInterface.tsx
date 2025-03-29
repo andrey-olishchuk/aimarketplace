@@ -96,12 +96,6 @@ export default function ChatInterface({ agent, onBack, inline = false }: ChatInt
         {/* Data Source Selector for Data Q&A agent */}
         {isDataQA && (
           <div className="mb-4">
-            <div className="flex items-center mb-2">
-              <div className="w-4 h-4 bg-blue-100 rounded-full flex items-center justify-center mr-2">
-                <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-              </div>
-              <span className="text-sm font-medium text-gray-700">Select Data Source</span>
-            </div>
             <Select 
               value={selectedDataSource} 
               onValueChange={setSelectedDataSource}
