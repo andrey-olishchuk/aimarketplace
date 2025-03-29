@@ -25,7 +25,7 @@ export default function AgentsCatalogue({ freeAgents, premiumAgents, searchQuery
     agent.tags.some(tag => tag.name.toLowerCase().includes(searchQuery.toLowerCase()))
   );
   
-  const allAgents = [...filteredFreeAgents, ...filteredPremiumAgents];
+  const allAgents = [...filteredPremiumAgents, ...filteredFreeAgents];
   
   return (
     <div className="mb-8">
