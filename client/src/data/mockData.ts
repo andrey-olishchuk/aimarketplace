@@ -81,39 +81,6 @@ export const hiredAgents: Agent[] = [
       { name: "InfluxDB Cloud", bgColor: "bg-blue-100", textColor: "text-blue-800" },
       { name: "PostgreSQL", bgColor: "bg-indigo-100", textColor: "text-indigo-800" }
     ]
-  },
-  {
-    id: 4,
-    name: "AI Model Trainer",
-    description: "Automatically trains, evaluates, and deploys machine learning models based on your data. Handles feature engineering and hyperparameter tuning.",
-    fullDescription: "Automatically trains, evaluates, and deploys machine learning models based on your data. The AI Model Trainer agent intelligently selects appropriate algorithms, performs feature engineering, and optimizes hyperparameters to create high-performing predictive models. It also provides detailed model explanations and deployment options to integrate predictions into your workflows.",
-    type: "premium",
-    tags: [
-      { name: "AITraining", bgColor: "bg-secondary bg-opacity-20", textColor: "text-secondary" },
-      { name: "MLOps", bgColor: "bg-indigo-100", textColor: "text-indigo-800" }
-    ],
-    iconPath: "M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z",
-    iconBg: "bg-secondary",
-    iconColor: "text-white",
-    compatibleWith: "all sources",
-    capabilities: [
-      "Automated machine learning model training",
-      "Intelligent feature engineering and selection",
-      "Hyperparameter optimization",
-      "Model evaluation and comparison",
-      "Model explainability and transparency",
-      "Continuous model monitoring and retraining",
-      "Deployment options for real-time or batch predictions"
-    ],
-    sampleOutputDescriptions: [
-      "Feature importance visualization for predictive model",
-      "Performance metrics comparison across different algorithms"
-    ],
-    compatibilitySources: [
-      { name: "InfluxDB Cloud", bgColor: "bg-blue-100", textColor: "text-blue-800" },
-      { name: "PostgreSQL", bgColor: "bg-indigo-100", textColor: "text-indigo-800" },
-      { name: "Redis Cloud", bgColor: "bg-red-100", textColor: "text-red-800" }
-    ]
   }
 ];
 
@@ -128,8 +95,8 @@ export const stats: StatCard[] = [
   },
   {
     title: "Hired Agents",
-    value: "4",
-    description: "2 Free · 2 Premium",
+    value: "1",
+    description: "1 Free · 0 Premium",
     iconPath: "M13 7h8m0 0v8m0-8l-8 8-4-4-6 6",
     iconBg: "bg-green-500",
     iconColor: "text-white"
@@ -237,6 +204,7 @@ export const premiumAgents: Agent[] = [
     fullDescription: "Automatically trains, evaluates, and deploys machine learning models based on your data. The AI Model Trainer agent intelligently selects appropriate algorithms, performs feature engineering, and optimizes hyperparameters to create high-performing predictive models. It also provides detailed model explanations and deployment options to integrate predictions into your workflows.",
     type: "premium",
     tags: [
+      { name: "Premium", bgColor: "bg-amber-100", textColor: "text-amber-800" },
       { name: "AITraining", bgColor: "bg-secondary bg-opacity-20", textColor: "text-secondary" },
       { name: "MLOps", bgColor: "bg-indigo-100", textColor: "text-indigo-800" }
     ],
@@ -270,6 +238,7 @@ export const premiumAgents: Agent[] = [
     fullDescription: "Comprehensive data analysis with advanced statistical methods, interactive dashboards, and custom reports. The Advanced Analytics agent provides deep insights into your data using sophisticated analytical techniques. It helps you discover hidden patterns, understand complex relationships, and create stunning visualizations that tell the story of your data.",
     type: "premium",
     tags: [
+      { name: "Premium", bgColor: "bg-amber-100", textColor: "text-amber-800" },
       { name: "DataScience", bgColor: "bg-secondary bg-opacity-20", textColor: "text-secondary" },
       { name: "Advanced Visualization", bgColor: "bg-blue-100", textColor: "text-blue-800" }
     ],

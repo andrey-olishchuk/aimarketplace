@@ -29,8 +29,8 @@ export default function HiredAgentsSection({ agents }: HiredAgentsSectionProps) 
                   <div className="flex items-center">
                     <h4 className="text-lg font-semibold text-gray-900">{agent.name}</h4>
                     <Badge 
-                      variant={agent.type === 'premium' ? 'secondary' : 'outline'} 
-                      className="ml-2"
+                      variant={agent.type === 'premium' ? 'outline' : 'outline'} 
+                      className={`ml-2 ${agent.type === 'premium' ? 'bg-amber-100 text-amber-800 border-amber-200' : ''}`}
                     >
                       {agent.type === 'premium' ? 'Premium' : 'Free'}
                     </Badge>

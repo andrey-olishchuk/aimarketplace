@@ -74,7 +74,9 @@ export default function AgentProfile() {
                     {agent.tags.map((tag, index) => (
                       <span 
                         key={index} 
-                        className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${tag.bgColor} ${tag.textColor}`}
+                        className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                            tag.name === "Premium" ? "bg-amber-100 text-amber-800" : `${tag.bgColor} ${tag.textColor}`
+                          }`}
                       >
                         {tag.name}
                       </span>
