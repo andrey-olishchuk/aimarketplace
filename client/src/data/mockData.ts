@@ -51,7 +51,7 @@ export interface Agent {
 export const stats: StatCard[] = [
   {
     title: "Connected Data Sources",
-    value: "3",
+    value: "1",
     iconPath: "M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z",
     iconBg: "bg-primary",
     iconColor: "text-white"
@@ -83,33 +83,13 @@ export const stats: StatCard[] = [
 export const dataSources: DataSource[] = [
   {
     id: 1,
-    name: "InfluxDB Cloud: Bucket Accelerator",
+    name: "InfluxDB Cloud: Bucket Telecanesis",
     connectedTime: "2 months ago",
     size: "450 GB",
     status: "Active",
     iconPath: "M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4",
     iconBg: "bg-blue-100",
     iconColor: "text-primary"
-  },
-  {
-    id: 2,
-    name: "MongoDB Atlas: Production",
-    connectedTime: "5 months ago",
-    size: "350 GB",
-    status: "Active",
-    iconPath: "M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10",
-    iconBg: "bg-indigo-100",
-    iconColor: "text-indigo-600"
-  },
-  {
-    id: 3,
-    name: "Redis Cloud: Cache Server",
-    connectedTime: "1 month ago",
-    size: "50 GB",
-    status: "Inactive",
-    iconPath: "M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01",
-    iconBg: "bg-red-100",
-    iconColor: "text-red-600"
   }
 ];
 
