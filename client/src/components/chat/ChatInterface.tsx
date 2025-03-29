@@ -219,7 +219,7 @@ export default function ChatInterface({ agent, onBack, inline = false }: ChatInt
             <Button 
               type="submit" 
               className="ml-3"
-              disabled={isProcessing || !input.trim()}
+              disabled={isProcessing}
             >
               <span className="mr-1">Send</span>
               <svg className="h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -404,7 +404,7 @@ export default function ChatInterface({ agent, onBack, inline = false }: ChatInt
             <Button 
               type="submit" 
               className="ml-3"
-              disabled={isProcessing || !input.trim()}
+              disabled={isProcessing}
             >
               <span className="mr-2">Send</span>
               <svg className="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
