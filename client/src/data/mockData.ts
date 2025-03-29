@@ -3,6 +3,7 @@
 export interface StatCard {
   title: string;
   value: string;
+  description?: string;
   iconPath: string;
   iconBg: string;
   iconColor: string;
@@ -58,7 +59,8 @@ export const stats: StatCard[] = [
   },
   {
     title: "Hired Agents",
-    value: "5",
+    value: "4",
+    description: "2 Free · 2 Premium",
     iconPath: "M13 7h8m0 0v8m0-8l-8 8-4-4-6 6",
     iconBg: "bg-green-500",
     iconColor: "text-white"
@@ -69,7 +71,7 @@ export const stats: StatCard[] = [
 export const dataSources: DataSource[] = [
   {
     id: 1,
-    name: "InfluxDB Cloud: Bucket Telecanesis",
+    name: "InfluxDB Cloud: Bucket TeleCANesis",
     connectedTime: "2 months ago",
     size: "450 GB",
     status: "Active",
@@ -79,7 +81,7 @@ export const dataSources: DataSource[] = [
   },
   {
     id: 2,
-    name: "PostgreSQL 10.10.1.1: Database Telecanesis",
+    name: "PostgreSQL 10.10.1.1: Database TeleCANesis",
     connectedTime: "1 month ago",
     size: "320 GB",
     status: "Inactive",
@@ -190,38 +192,6 @@ export const premiumAgents: Agent[] = [
       { name: "InfluxDB Cloud", bgColor: "bg-blue-100", textColor: "text-blue-800" },
       { name: "PostgreSQL", bgColor: "bg-indigo-100", textColor: "text-indigo-800" },
       { name: "Redis Cloud", bgColor: "bg-red-100", textColor: "text-red-800" }
-    ]
-  },
-  {
-    id: 5,
-    name: "Anomaly Detective",
-    description: "Advanced anomaly detection with root cause analysis and predictive maintenance recommendations. Integrates with alerting systems.",
-    fullDescription: "Advanced anomaly detection with root cause analysis and predictive maintenance recommendations. The Anomaly Detective agent continuously monitors your time-series data to identify unusual patterns, correlates anomalies across multiple metrics, and provides detailed explanations of potential root causes. It helps operations teams quickly diagnose issues and take proactive measures.",
-    type: "premium",
-    tags: [
-      { name: "FailureReasoning", bgColor: "bg-secondary bg-opacity-20", textColor: "text-secondary" },
-      { name: "Root Cause Analysis", bgColor: "bg-red-100", textColor: "text-red-800" }
-    ],
-    iconPath: "M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z",
-    iconBg: "bg-secondary",
-    iconColor: "text-white",
-    compatibleWith: "InfluxDB, PostgreSQL",
-    capabilities: [
-      "Real-time anomaly detection across multiple metrics",
-      "Correlation analysis for anomaly groups",
-      "Root cause analysis with confidence scoring",
-      "Predictive maintenance recommendations",
-      "Alert system integration with severity levels",
-      "Historical anomaly comparison",
-      "Failure prevention recommendations"
-    ],
-    sampleOutputDescriptions: [
-      "Multi-metric anomaly correlation with highlighted root cause",
-      "Predictive maintenance schedule based on detected patterns"
-    ],
-    compatibilitySources: [
-      { name: "InfluxDB Cloud", bgColor: "bg-blue-100", textColor: "text-blue-800" },
-      { name: "PostgreSQL", bgColor: "bg-indigo-100", textColor: "text-indigo-800" }
     ]
   },
   {

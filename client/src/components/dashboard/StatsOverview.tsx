@@ -26,6 +26,11 @@ export default function StatsOverview({ stats }: StatsOverviewProps) {
                       <div className="text-lg font-semibold text-gray-900">
                         {stat.value}
                       </div>
+                      {stat.description && (
+                        <div className="text-xs text-gray-500 mt-1">
+                          {stat.description}
+                        </div>
+                      )}
                     </dd>
                   </dl>
                 </div>
