@@ -3,17 +3,18 @@ import { useRoute, useLocation } from "wouter";
 import Navbar from "@/components/layout/Navbar";
 import ChatInterface from "@/components/chat/ChatInterface";
 import { freeAgents, premiumAgents, hiredAgents } from "@/data/mockData";
+import { Button } from "@/components/ui/button";
 
 export default function AgentProfile() {
   const [, setLocation] = useLocation();
   const [match, params] = useRoute("/agent/:id");
-  const [showChat, setShowChat] = useState(false);
+  const [showChatView, setShowChatView] = useState(false);
   
   // Parse query parameters to check if we should show chat
   useEffect(() => {
     const queryParams = new URLSearchParams(window.location.search);
     if (queryParams.get('chat') === 'true') {
-      setShowChat(true);
+      setShowChatView(true);
     }
   }, []);
 
@@ -28,18 +29,6 @@ export default function AgentProfile() {
   if (!agent) {
     setLocation("/not-found");
     return null;
-  }
-
-  if (showChat) {
-    return (
-      <div className="min-h-screen flex flex-col bg-gray-50">
-        <Navbar />
-        <ChatInterface 
-          agent={agent} 
-          onBack={() => setShowChat(false)} 
-        />
-      </div>
-    );
   }
 
   return (
@@ -60,77 +49,128 @@ export default function AgentProfile() {
             </button>
           </div>
 
-          <div className="bg-white shadow overflow-hidden sm:rounded-lg">
-            <div className="px-4 py-5 sm:px-6 flex justify-between">
-              <div className="flex items-center">
-                <div className={`flex-shrink-0 h-12 w-12 ${agent.iconBg} rounded-full flex items-center justify-center`}>
-                  <svg className={`h-8 w-8 ${agent.iconColor}`} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={agent.iconPath} />
-                  </svg>
-                </div>
-                <div className="ml-4">
-                  <h2 className="text-2xl font-bold text-gray-900">{agent.name}</h2>
-                  <div className="flex space-x-2 mt-1">
-                    {agent.tags.map((tag, index) => (
-                      <span 
-                        key={index} 
-                        className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                            tag.name === "Premium" ? "bg-amber-100 text-amber-800" : `${tag.bgColor} ${tag.textColor}`
-                          }`}
-                      >
-                        {tag.name}
-                      </span>
-                    ))}
+          {isHired ? (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {/* Chat interface - Main content for hired agents */}
+              <div className="md:col-span-2">
+                <div className="bg-white shadow overflow-hidden sm:rounded-lg h-full">
+                  <div className="px-4 py-3 sm:px-6 border-b border-gray-200">
+                    <div className="flex items-center">
+                      <div className={`flex-shrink-0 h-10 w-10 ${agent.iconBg} rounded-full flex items-center justify-center`}>
+                        <svg className={`h-6 w-6 ${agent.iconColor}`} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={agent.iconPath} />
+                        </svg>
+                      </div>
+                      <div className="ml-3">
+                        <h3 className="text-lg font-medium text-gray-900">Chat with {agent.name}</h3>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="p-4" style={{ minHeight: "500px" }}>
+                    <ChatInterface agent={agent} onBack={() => {}} inline={true} />
                   </div>
                 </div>
               </div>
-              {isHired ? (
-                <button 
-                  type="button" 
-                  className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-primary hover:bg-blue-700 focus:ring-primary focus:outline-none focus:ring-2 focus:ring-offset-2"
-                  onClick={() => setShowChat(true)}
-                >
-                  Chat with Agent
-                </button>
-              ) : (
-                <button 
-                  type="button" 
-                  className={`inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white ${
+              
+              {/* Agent details - Secondary content for hired agents */}
+              <div className="md:col-span-1">
+                <div className="bg-white shadow overflow-hidden sm:rounded-lg">
+                  <div className="px-4 py-5 sm:px-6">
+                    <h3 className="text-lg font-medium text-gray-900">Agent Details</h3>
+                    <p className="mt-1 text-sm text-gray-500">{agent.description}</p>
+                  </div>
+                  <div className="border-t border-gray-200 px-4 py-5 sm:px-6">
+                    <h4 className="text-md font-medium text-gray-900 mb-2">Capabilities:</h4>
+                    <ul className="list-disc pl-5 mb-4 text-sm text-gray-500 space-y-1">
+                      {agent.capabilities.map((capability, index) => (
+                        <li key={index}>{capability}</li>
+                      ))}
+                    </ul>
+                    
+                    <h4 className="text-md font-medium text-gray-900 mb-2">Compatible with:</h4>
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {agent.compatibilitySources.map((source, index) => (
+                        <span 
+                          key={index}
+                          className={`inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium ${source.bgColor} ${source.textColor}`}
+                        >
+                          {source.name}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ) : (
+            // Non-hired agent view
+            <div className="bg-white shadow overflow-hidden sm:rounded-lg">
+              <div className="px-4 py-5 sm:px-6 flex justify-between">
+                <div className="flex items-center">
+                  <div className={`flex-shrink-0 h-12 w-12 ${agent.iconBg} rounded-full flex items-center justify-center`}>
+                    <svg className={`h-8 w-8 ${agent.iconColor}`} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={agent.iconPath} />
+                    </svg>
+                  </div>
+                  <div className="ml-4">
+                    <h2 className="text-2xl font-bold text-gray-900">{agent.name}</h2>
+                    <div className="flex space-x-2 mt-1">
+                      {agent.tags.map((tag, index) => (
+                        <span 
+                          key={index} 
+                          className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                              tag.name === "Premium" ? "bg-amber-100 text-amber-800" : `${tag.bgColor} ${tag.textColor}`
+                            }`}
+                        >
+                          {tag.name}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                <Button 
+                  className={`${
                     agent.type === 'free' 
                       ? 'bg-primary hover:bg-blue-700 focus:ring-primary' 
                       : 'bg-amber-600 hover:bg-amber-700 focus:ring-amber-600'
-                  } focus:outline-none focus:ring-2 focus:ring-offset-2`}
-                  onClick={() => setShowChat(true)}
+                  }`}
+                  onClick={() => setShowChatView(!showChatView)}
                 >
                   {agent.type === 'free' ? 'Hire for free' : 'Hire Premium'}
-                </button>
-              )}
-            </div>
-            
-            <div className="border-t border-gray-200 px-4 py-5 sm:px-6">
-              <h3 className="text-lg font-medium text-gray-900 mb-4">About this agent</h3>
-              <p className="text-sm text-gray-500 mb-6">{agent.fullDescription || agent.description}</p>
+                </Button>
+              </div>
               
-              <h4 className="text-md font-medium text-gray-900 mb-2">Capabilities:</h4>
-              <ul className="list-disc pl-5 mb-6 text-sm text-gray-500 space-y-1">
-                {agent.capabilities.map((capability, index) => (
-                  <li key={index}>{capability}</li>
-                ))}
-              </ul>
+              {showChatView && (
+                <div className="border-t border-gray-200 px-4 py-5 sm:px-6">
+                  <ChatInterface agent={agent} onBack={() => setShowChatView(false)} inline={true} />
+                </div>
+              )}
+              
+              <div className="border-t border-gray-200 px-4 py-5 sm:px-6">
+                <h3 className="text-lg font-medium text-gray-900 mb-4">About this agent</h3>
+                <p className="text-sm text-gray-500 mb-6">{agent.fullDescription || agent.description}</p>
+                
+                <h4 className="text-md font-medium text-gray-900 mb-2">Capabilities:</h4>
+                <ul className="list-disc pl-5 mb-6 text-sm text-gray-500 space-y-1">
+                  {agent.capabilities.map((capability, index) => (
+                    <li key={index}>{capability}</li>
+                  ))}
+                </ul>
 
-              <h4 className="text-md font-medium text-gray-900 mb-2">Compatible with:</h4>
-              <div className="flex space-x-2 mb-6">
-                {agent.compatibilitySources.map((source, index) => (
-                  <span 
-                    key={index}
-                    className={`inline-flex items-center px-2.5 py-0.5 rounded-md text-sm font-medium ${source.bgColor} ${source.textColor}`}
-                  >
-                    {source.name}
-                  </span>
-                ))}
+                <h4 className="text-md font-medium text-gray-900 mb-2">Compatible with:</h4>
+                <div className="flex space-x-2 mb-6">
+                  {agent.compatibilitySources.map((source, index) => (
+                    <span 
+                      key={index}
+                      className={`inline-flex items-center px-2.5 py-0.5 rounded-md text-sm font-medium ${source.bgColor} ${source.textColor}`}
+                    >
+                      {source.name}
+                    </span>
+                  ))}
+                </div>
               </div>
             </div>
-          </div>
+          )}
         </div>
       </main>
     </div>
