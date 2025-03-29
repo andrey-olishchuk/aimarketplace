@@ -108,29 +108,6 @@ export default function AgentProfile() {
                 ))}
               </ul>
 
-              <h4 className="text-md font-medium text-gray-900 mb-4">Example outputs:</h4>
-              <div className="bg-gray-50 p-4 rounded-lg mb-6">
-                <h5 className="font-medium text-gray-900 mb-2">Sample Data Analysis</h5>
-                <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
-                  <div className="bg-white p-3 rounded shadow flex-1">
-                    <img 
-                      src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" 
-                      alt="Sample visualization" 
-                      className="w-full h-48 object-cover rounded mb-2"
-                    />
-                    <p className="text-xs text-gray-500">{agent.sampleOutputDescriptions[0]}</p>
-                  </div>
-                  <div className="bg-white p-3 rounded shadow flex-1">
-                    <img 
-                      src="https://images.unsplash.com/photo-1543286386-713bdd548da4?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" 
-                      alt="Sample correlation matrix" 
-                      className="w-full h-48 object-cover rounded mb-2"
-                    />
-                    <p className="text-xs text-gray-500">{agent.sampleOutputDescriptions[1]}</p>
-                  </div>
-                </div>
-              </div>
-
               <h4 className="text-md font-medium text-gray-900 mb-2">Compatible with:</h4>
               <div className="flex space-x-2 mb-6">
                 {agent.compatibilitySources.map((source, index) => (
