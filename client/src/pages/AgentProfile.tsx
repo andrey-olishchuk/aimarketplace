@@ -93,7 +93,7 @@ export default function AgentProfile() {
                 } focus:outline-none focus:ring-2 focus:ring-offset-2`}
                 onClick={() => setShowChat(true)}
               >
-                {isHired ? 'Ask' : (agent.type === 'free' ? 'Hire for free' : 'Hire Premium')}
+                {isHired ? 'Ask' : 'Chat with Agent'}
               </button>
             </div>
             

@@ -1,6 +1,7 @@
 import { Agent } from "@/data/mockData";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Link } from "wouter";
 
 interface AgentCardProps {
   agent: Agent;
@@ -35,7 +36,9 @@ export default function AgentCard({ agent }: AgentCardProps) {
             </div>
             <p className="text-sm text-gray-500 mb-4">{agent.description}</p>
             <div className="flex justify-end">
-              <Button variant="default">Hire</Button>
+              <Link href={`/agent/${agent.id}`}>
+                <Button variant="default">Details</Button>
+              </Link>
             </div>
           </div>
         </div>

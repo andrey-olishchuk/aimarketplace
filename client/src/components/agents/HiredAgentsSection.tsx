@@ -45,7 +45,7 @@ export default function HiredAgentsSection({ agents }: HiredAgentsSectionProps) 
                   <p className="text-sm text-gray-500 mb-4">{agent.description}</p>
                   <div className="flex justify-end">
                     <Link href={`/agent/${agent.id}`}>
-                      <Button variant="default" className="mr-2">Ask</Button>
+                      <Button variant="default" className="mr-2">Details</Button>
                     </Link>
                   </div>
                 </div>
